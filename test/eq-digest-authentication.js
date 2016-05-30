@@ -7,25 +7,25 @@
 
 // Variables
 const util = require('util'),
+    authentication_strategy = require('eq-digest-authentication-strategy'),
     co = require('co'),
     expect = require('expect.js'),
     express = require('express'),
     request = require('superagent'),
-    utility = require('karmia-utility'),
-    authentication_strategy = require('eq-digest-authentication-strategy'),
+    utility = require('karmia-utility')(),
     authentication = require('../'),
     port = 30000,
     options = {
         realm: 'eq-digest-auth-strategy-object',
-        qop: 'auth'
+        qop: 'auth',
+        users: [
+            {
+                username: 'test_username',
+                password: 'test_password'
+            }
+        ]
     },
-    users = [
-        {
-            username: 'test_username',
-            password: 'test_password'
-        }
-    ],
-    strategy = authentication_strategy.object(users, options),
+    strategy = authentication_strategy('object', options),
     auth = authentication(strategy, options);
 
 
@@ -103,7 +103,7 @@ describe('Test', function () {
                     cnonce: 'CNONCE',
                     qop: 'auth'
                 },
-                response = auth.response(req, parameters, users[0]);
+                response = auth.response(req, parameters, options.users[0]);
 
             expect(response).to.have.length(64);
 
@@ -126,10 +126,10 @@ describe('Test', function () {
                         cnonce: 'CNONCE',
                         nc: '000001'
                     },
-                    response = auth.response(req, parameters, users[0]),
+                    response = auth.response(req, parameters, options.users[0]),
                     authorization = util.format(
                         'Digest username="%s", realm="%s", nonce="%s", uri="%s", algorithm=%s, response="%s", qop="%s", nc="%s", cnonce="%s"',
-                        users[0].username,
+                        options.users[0].username,
                         parameters.realm,
                         parameters.nonce,
                         parameters.uri,
