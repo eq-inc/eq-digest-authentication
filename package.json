@@ -1,6 +1,6 @@
 {
     "name": "eq-digest-authentication",
-    "version": "0.1.5",
+    "version": "0.1.6",
     "description": "Digest authentication module for Eq applications",
     "homepage": "https://github.com/eq-inc/eq-digest-authentication",
     "license": "Apache-2.0",
@@ -14,15 +14,15 @@
         "test": "./node_modules/.bin/mocha ./test"
     },
     "dependencies": {
-        "co": ">=4.6.0",
-        "karmia-utility": ">=0.6.0"
+        "co": "^4.6.0",
+        "karmia-utility": "^0.6.0"
     },
     "devDependencies": {
-        "eq-digest-authentication-strategy": ">=0.2.4",
-        "mocha": ">=2.4.5",
-        "expect.js": ">=0.3.1",
-        "express": ">=4.13.4",
-        "superagent": ">=1.8.3"
+        "eq-digest-authentication-strategy": "^0.2.5",
+        "mocha": "^5.0.5",
+        "expect.js": "^0.3.1",
+        "express": "^4.16.3",
+        "superagent": "^3.8.2"
     },
     "engines": {
         "node": ">=6.0.0"
